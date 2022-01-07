@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "strict": true,
+    "strict": true, // noimplicity any false가 디폴트 - true인경우 타입을 무조건 작성해야함
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",

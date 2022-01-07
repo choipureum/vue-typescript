@@ -1,8 +1,8 @@
 ## vue 설정
-(Vue.js 개발 생산성을 높여주는 도구 3가지)[https://joshua1988.github.io/web-development/vuejs/boost-productivity/]
+[Vue.js 개발 생산성을 높여주는 도구 3가지](https://joshua1988.github.io/web-development/vuejs/boost-productivity/)
 
 ## setting
-![image](./img/캡쳐.PNG)
+![image](./img/캡처.PNG)
 
 ## vue update
 ```
