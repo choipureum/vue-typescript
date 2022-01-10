@@ -1,11 +1,21 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
+import Vuex, { StoreOptions } from 'vuex';
 
-import mutations from './mutations.js';
-import actions from './actions';
+import { mutations } from './mutations';
+import { actions } from './actions';
+import { RootState, state } from './state';
 
 Vue.use(Vuex);
 
+export const store: StoreOptions<RootState> = {
+	state: state,
+	mutations: mutations,
+	actions: actions,
+};
+
+export default new Vuex.Store(store);
+
+/*
 export const store = new Vuex.Store({
 	state: {
 		news: [],
@@ -35,3 +45,4 @@ export const store = new Vuex.Store({
 	mutations,
 	actions,
 });
+*/

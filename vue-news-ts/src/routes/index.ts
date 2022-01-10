@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-import bus from '../utils/bus.js';
-import { store } from '../store/index.js';
+import VueRouter, { NavigationGuardNext, Route } from 'vue-router';
+import bus from '../utils/bus';
+import { store } from '../store/index';
 
 import NewsView from '../views/NewsView.vue';
 import AskView from '../views/AskView.vue';
@@ -10,7 +10,7 @@ import ItemView from '../views/ItemView.vue';
 import UserView from '../views/UserView.vue';
 import AsyncEx from '../views/AsyncEx.vue';
 
-import createListView from '../views/CreatedListView.js';
+import createListView from '../views/CreatedListView';
 
 Vue.use(VueRouter);
 
@@ -25,23 +25,20 @@ export const router = new VueRouter({
 		{
 			path: '/news', //url 주소
 			name: 'news',
-			component: NewsView, //url 주소로 갔을때 표시될 컴포넌트 (mixin적용)
-			//component: createListView('NewsView'), //HOC
-			beforeEnter: (to, from, next) => {
-				// to : 이동할 URL 정보
-				// from : 현재 URL 정보
-				// next : function => next function을 호출해야만 to url로 넘어감 next();
-				bus.$emit('start:spinner');
-				store
-					.dispatch('FETCH_LIST', to.name) // this.$route.name = to.name
-					.then(() => {
-						console.log('5 fetched');
-						//bus.$emit('end:spinner');
-						next();
-					})
-					.catch(error => {
-						console.log(error);
-					});
+			//component: NewsView, //url 주소로 갔을때 표시될 컴포넌트 (mixin적용)
+			component: createListView('NewsView'), //HOC
+			async beforeEnter(
+				routeTo: Route,
+				routeFrom: Route,
+				next: NavigationGuardNext<Vue>,
+			) {
+				bus.$emit('on:progress');
+				try {
+					await store.dispatch('FETCH_LIST', routeTo.name); // this.$route.name = to.name
+					next();
+				} catch (error) {
+					next('/error');
+				}
 			},
 		},
 		{
@@ -53,7 +50,7 @@ export const router = new VueRouter({
 				// to : 이동할 URL 정보
 				// from : 현재 URL 정보
 				// next : function => next function을 호출해야만 to url로 넘어감 next();
-				bus.$emit('start:spinner');
+				bus.$emit('on:progress');
 				store
 					.dispatch('FETCH_LIST', to.name) // this.$route.name = to.name
 					.then(() => {
@@ -75,7 +72,7 @@ export const router = new VueRouter({
 				// to : 이동할 URL 정보
 				// from : 현재 URL 정보
 				// next : function => next function을 호출해야만 to url로 넘어감 next();
-				bus.$emit('start:spinner');
+				bus.$emit('on:progress');
 				store
 					.dispatch('FETCH_LIST', to.name) // this.$route.name = to.name
 					.then(() => {

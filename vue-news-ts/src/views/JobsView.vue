@@ -1,22 +1,22 @@
 <template>
-    <div>
-        <list-item></list-item>
-    </div>
+	<div>
+		<list-item></list-item>
+	</div>
 </template>
 
 <script>
 //import { mapGetters, mapState } from 'vuex';
 import ListItem from '../components/ListItem.vue';
 import ListMixin from '../mixins/ListMixin.js';
-import bus from '../utils/bus.js';
+import bus from '../utils/bus.ts';
 
 export default {
-  components: { ListItem },
-  mounted(){
-    bus.$emit('end:spinner');
-  },
-  //mixins: [ListMixin],
-    /*
+	components: { ListItem },
+	mounted() {
+		bus.$emit('end:spinner');
+	},
+	//mixins: [ListMixin],
+	/*
     computed:{
         ...mapGetters([
             'fetchJobs',
@@ -27,8 +27,7 @@ export default {
         this.$store.dispatch('FETCH_JOBS');
     },
     */
-}
+};
 </script>
 
-<style>
-</style>
+<style></style>

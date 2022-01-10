@@ -41,16 +41,29 @@
 		</ul>
 	</div>
 </template>
-<script>
-export default {
+<script lang="ts">
+import { NewsItem } from '@/api';
+import Vue, { PropType } from 'vue';
+
+export default Vue.extend({
+	props: {
+		items: {
+			type: Array as PropType<NewsItem[]>,
+			required: true,
+		},
+	},
+	methods: {
+		timeAgo(news: NewsItem): string {
+			return news.time_ago.concat(', 2021');
+		},
+	},
 	computed: {
-		listItems() {
+		listItems(): any {
 			return this.$store.state.list;
 		},
 	},
-};
+});
 </script>
-
 <style scoped>
 .contents-list {
 	margin: 0;

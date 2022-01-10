@@ -1,27 +1,27 @@
 <template>
-    <div>
-        <list-item></list-item>
-    </div>
+	<div>
+		<list-item></list-item>
+	</div>
 </template>
 
 <script>
 import ListItem from '../components/ListItem.vue';
-import bus from '../utils/bus.js';
+import bus from '../utils/bus.ts';
 import ListMixin from '../mixins/ListMixin.js';
 import SpinnerMixin from '../mixins/SpinnerMixin.js';
 
 export default {
-    components:{
-        ListItem,
-    },
-    /* mixin 처리 가능
+	components: {
+		ListItem,
+	},
+	/* mixin 처리 가능
     mounted(){
         bus.$emit('end:spinner');
     }
     */
-    mixins: [SpinnerMixin],
-    //mixins: [ListMixin],
-    /*
+	mixins: [SpinnerMixin],
+	//mixins: [ListMixin],
+	/*
     created(){
         bus.$emit('start:spinner');
         this.$store.dispatch('FETCH_NEWS')
@@ -33,9 +33,7 @@ export default {
             });
     },
     */
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -16,6 +16,7 @@ import Vue from 'vue';
 import ToolBar from './components/ToolBar.vue';
 import Spinner from './components/Spinner.vue';
 import bus from '@/utils/bus';
+import { MutationTypes } from './store/mutations';
 
 export default Vue.extend({
 	components: {
@@ -28,21 +29,22 @@ export default Vue.extend({
 		};
 	},
 	methods: {
-		startSpinner() {
+		onProgress() {
 			this.loadingStatus = true;
 		},
-		endSpinner() {
+		offProgress() {
 			this.loadingStatus = false;
 		},
 	},
 	created() {
+		this.$store.commit(MutationTypes.SET_NEWS);
 		console.log(process.env.VUE_APP_TITLE);
-		bus.$on('start:spinner', this.startSpinner);
-		bus.$on('end:spinner', this.endSpinner);
+		bus.$on('on:progress', this.onProgress);
+		bus.$on('off:progress', this.offProgress);
 	},
 	beforeDestroy() {
-		bus.$off('start:spinner', this.startSpinner);
-		bus.$off('end:spinner', this.endSpinner);
+		bus.$off('start:spinner', this.onProgress);
+		bus.$off('end:spinner', this.offProgress);
 	},
 });
 </script>

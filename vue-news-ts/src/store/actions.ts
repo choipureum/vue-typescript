@@ -1,3 +1,4 @@
+import { ActionContext } from 'vuex';
 import {
 	fetchNewsList,
 	fetchAskList,
@@ -5,8 +6,37 @@ import {
 	fetchUserInfo,
 	fetchItemInfo,
 	fetchList,
-} from '../api/index.js';
+	NewsItem,
+} from '../api/index';
+import { Mutations, MutationTypes } from './mutations';
+import { RootState } from './state';
 
+enum ActionTypes {
+	FETCH_NEWS = 'FETCH_NEWS',
+}
+
+type MyActionContext = {
+	commit<K extends keyof Mutations>(
+		key: K,
+		payload: Parameters<Mutations[K]>[1],
+	): ReturnType<Mutations[K]>;
+} & Omit<ActionContext<RootState, RootState>, 'commit'>;
+
+const actions = {
+	async [ActionTypes.FETCH_NEWS](
+		context: MyActionContext,
+		payload?: NewsItem[],
+	) {
+		const { data } = await fetchNewsList();
+		context.commit(MutationTypes.SET_NEWS, data);
+		return data;
+	},
+};
+
+type Actions = typeof actions;
+export { ActionTypes, actions, Actions };
+
+/*
 export default {
 	FETCH_NEWS(context) {
 		fetchNewsList()
@@ -51,8 +81,8 @@ export default {
 	},
 	FETCH_ITEM({ commit }, itemid) {
 		return fetchItemInfo(itemid)
-			.then(({ data }) => {
-				commit('SET_ITEM', data);
+			.then(response => {
+				commit('SET_ITEM', response.data);
 				return response;
 			})
 			.catch(error => {
@@ -72,3 +102,4 @@ export default {
 		return response; //반환해줘야 이후 .then().catch() 처리가 가능
 	},
 };
+*/

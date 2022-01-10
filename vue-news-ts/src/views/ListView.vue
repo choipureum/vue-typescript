@@ -1,19 +1,16 @@
 <template>
-  <div>
-      <list-item></list-item>
-  </div>
+	<div>
+		<list-item></list-item>
+	</div>
 </template>
-
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import ListItem from '../components/ListItem.vue';
 
-export default {
-    components:{
-        ListItem,
-    }
-}
+export default Vue.extend({
+	components: {
+		ListItem,
+	},
+});
 </script>
-
-<style>
-
-</style>
+<style></style>
