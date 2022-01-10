@@ -32,6 +32,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "src/types/**/*.d.ts", //타입추가 :지금은 project.d.ts적용 -> vuex상태관리를 프로젝트레벨로 올린다
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
