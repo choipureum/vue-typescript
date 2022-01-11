@@ -4,11 +4,13 @@ import Vuex, { StoreOptions } from 'vuex';
 import { mutations } from './mutations';
 import { actions } from './actions';
 import { RootState, state } from './state';
+import { getters } from './getter';
 
 Vue.use(Vuex);
 
 export const store: StoreOptions<RootState> = {
 	state: state,
+	getters: getters,
 	mutations: mutations,
 	actions: actions,
 };
