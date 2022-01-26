@@ -9,7 +9,7 @@
 npm update -g @vue/cli
 ```
 
-## vue 2 js [Options API] vs [Composition API]
+## vue.js [Options API] vs [Composition API]
 
 ## TypeScript [Class API] vs [Composition API]
 - vue RFC(Request for Comment) : class api 제안을 drop함 ->  Composition API
