@@ -1,17 +1,22 @@
 <template>
 	<div>
-		<canvas id="myChart"></canvas>
+		<canvas id="myChart" ref="myChart"></canvas>
 	</div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-
-export default Vue.extend({
+import Vue, { VueConstructor } from 'vue';
+import { MyVueRefs } from './types/index';
+// vue ref 추론 1번
+export default //Vue as VueConstructor<Vue & { $refs: { myChart: HTMLCanvasElement } }>
+(Vue as MyVueRefs<{ myChart: HTMLCanvasElement }>).extend({
 	mounted() {
-		const canvasElement = document.getElementById(
-			'myChart',
-		) as HTMLCanvasElement;
+		// 일반적인 돔  접근 지양 => ref 지향
+		// const canvasElement = document.getElementById(
+		// 	'myChart',
+		// ) as HTMLCanvasElement;
+		const canvasElement = this.$refs.myChart;
+
 		const ctx = canvasElement.getContext('2d');
 		if (!ctx) return;
 		const labels = ['January', 'February', 'March', 'April', 'May', 'June'];
