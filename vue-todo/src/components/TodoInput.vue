@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { Input } from '@/types/index';
 
 export default Vue.extend({
 	props: {
